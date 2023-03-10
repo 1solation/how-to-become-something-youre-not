@@ -31,6 +31,7 @@ With code & a magic thing called ✨**Machine Learning**✨ you can! You can eve
 I wanted to be a super secret spy when I was younger, the dream is still there
 
 Portrait of me
+lets demistify ML
 -->
 
 ---
@@ -70,7 +71,7 @@ transition: fade-out
 
 <div v-click>
 <br>
-We teach machines to guess what things are, or will, be based on lots and lots of examples
+We teach machines to guess what things are, or will, be based on lots and lots of data
 <br>
 </div>
 
@@ -79,7 +80,7 @@ We teach machines to guess what things are, or will, be based on lots and lots o
 </div>
 
 ---
-transition: fade-out
+transition: slide-left
 ---
 
 # How do machines learn? 🧠💻
@@ -87,30 +88,18 @@ transition: fade-out
 The machine or algorithm can understand whatever we tell it to understand. We pick out features, which is known as feature engineering, to help the algorithm to figure out what a piece of data is. A piece of data could be numbers, images, video, etc
 
 <div v-click>
-There are lots of different tools to help the machine learning model know what to understand, such as:
+Common example is classifying cats and dogs
 </div>
 <div v-click>
-<ul>
-<li> Supervised learning
-    <li> A person has to figure out each of these features from a piece of data and label it accordingly
-    </li>
-    </li>
-</ul>
+<img class="h-80 rounded shadow" src="img/cats-dogs.png"/>
 </div>
 
 <!--
-In simple terms.
+we would tell the algorithm what is a cat, what is a dog, and what we think differentiates them (pointy ears, the way they sit/stand etc)
 
-now we've gone over some basic terminology, time to move onto
+now we've gone over the core concepts
 
 -->
----
-transition: slide-left
----
-
-# How do machines learn? 🧠💻 - Example
-
-<img class="h-110 rounded shadow" src="img/cats-dogs.png"/>
 
 ---
 transition: slide-left
@@ -123,7 +112,7 @@ A family member was  diagnosed with Alopecia areata which is a disease that happ
 </div>
 <br>
 <div v-click>
-What other serious skin conditions are there?
+What serious skin conditions are out there?
 </div>
 <div v-click>
 <ul>
@@ -166,7 +155,7 @@ HAM10000 dataset: a large collection of multi-source dermatoscopic images of com
 transition: fade-out
 ---
 
-# Explore the dataset
+# Explore the dataset, with the power of code
 <div v-click>
 ```python
 // Categories of the diferent diseases
@@ -184,13 +173,85 @@ lesion_type_dict = {
 </div>
 
 <!--
-some code to translate the skin lesion labels to something human readable
+some code to translate the skin lesion labels to something human readable rather than the dx acronyms
+-->
+
+---
+transition: fade-out
+---
+
+# Explore the dataset, with the power of code
+
+<div v-click>
+```python
+df.lesion.value_counts()
+```
+<img class="h-50" src="img/df-lesions.png"/>
+</div>
+<div v-click>
+
+Something doesn't look right
+</div>
+<div v-after>
+<img class="h-30" src="https://media2.giphy.com/media/TwYP72KtO8YQQ4SNgz/giphy.gif?cid=ecf05e47ekvm0tb436exk8usipvotsci453e3ypp1znoxmh3&rid=giphy.gif&ct=g"/>
+</div>
+
+<!--
+what make up of images do I have in my dataset
+Definitely showing more of one data point, or skin lesion
 -->
 
 ---
 transition: slide-left
 ---
 
-# Explore the dataset
+# Explore the dataset, with the power of code
 
-dd
+<div v-click>
+Let's visualise that data
+```python
+fig, ax1 = plt.subplots(1, 1, figsize = (10, 5))
+sns.countplot(y = 'lesion', data = df, hue = "lesion", ax = ax1)
+```
+<img class="h-50" src="img/df-infographic.png"/>
+</div>
+<div v-click>
+Suspicions confirmed 🫡
+</div>
+<div v-after>
+<img class="h-30" src="https://media4.giphy.com/media/puOukoEvH4uAw/giphy.gif?cid=ecf05e47ekvm0tb436exk8usipvotsci453e3ypp1znoxmh3&rid=giphy.gif&ct=g"/>
+</div>
+<!--
+if data wasn't enough, a graph on top always is
+we can see a massive imbalance, this can add to data biases and will skew our results. if ML model guesses brown 70% it'll probably be right for my dataset, but not general application
+We can fix this with data augmentation when we train the model
+-->
+
+---
+transition: fade-out
+---
+
+# Now I need a machine learning algorithm to use
+
+<div v-click>
+My requirements:
+<ul>
+    <li>Lightweight for a mobile application</li>
+    <li>Ideally pretrained to save me some time & additional work</li>
+    <li>A cool name</li>
+</ul>
+</div>
+<div v-click>
+Pretrained refers to a machine learning model created by someone else and trained on a large dataset to solve a similar problem.
+</div>
+<div v-click>
+<img class="h65" src="https://media1.giphy.com/media/5wWf7HapUvpOumiXZRK/giphy.gif?cid=ecf05e478dmawwjncmkmcrsujq64nt99oj1m1qhjxzxun9ee&rid=giphy.gif&ct=g"/>
+</div>
+
+
+<!--
+now I've explored the data, it's time to pick a machine learning algorithm.
+similar problem = image classification
+taking what it knows and adding to it
+went with MobileNet, since intention was for mobile application & it's trained for general purpose image clasification
+-->
