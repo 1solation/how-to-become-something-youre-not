@@ -248,10 +248,48 @@ Pretrained refers to a machine learning model created by someone else and traine
 <img class="h65" src="https://media1.giphy.com/media/5wWf7HapUvpOumiXZRK/giphy.gif?cid=ecf05e478dmawwjncmkmcrsujq64nt99oj1m1qhjxzxun9ee&rid=giphy.gif&ct=g"/>
 </div>
 
-
 <!--
 now I've explored the data, it's time to pick a machine learning algorithm.
 similar problem = image classification
 taking what it knows and adding to it
 went with MobileNet, since intention was for mobile application & it's trained for general purpose image clasification
+-->
+
+---
+transition: slide left
+---
+
+# Time to train the model
+<div v-click>
+<img class="h100" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2VmYzM4NzI1YTRmYjM0YTliNjc0YmUyYTk3MmUwZDRmNThiZDAxYSZjdD1n/xmxGoENM1V81q/giphy.gif"/>
+</div>
+
+<!--
+I thought it would be something akin to a scene out of Rocky
+-->
+
+---
+transition: slide-left
+---
+
+# Time to train the model
+<div v-click>
+<img class="h65" src="https://media0.giphy.com/media/zOvBKUUEERdNm/giphy.gif?cid=ecf05e47h2bvf22791h1pbfa9oaq8j378jg0z1lcg08tgx3o&rid=giphy.gif&ct=g"/>
+</div>
+
+<!--
+But it was more like this
+-->
+
+---
+transition: slide-left
+---
+
+# Steps to train
+<div v-click>
+<img class="h65" src="https://media0.giphy.com/media/zOvBKUUEERdNm/giphy.gif?cid=ecf05e47h2bvf22791h1pbfa9oaq8j378jg0z1lcg08tgx3o&rid=giphy.gif&ct=g"/>
+</div>
+
+<!--
+But it was more like this
 -->
