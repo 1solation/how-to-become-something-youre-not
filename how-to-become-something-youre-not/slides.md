@@ -4,7 +4,7 @@ background: https://images.pexels.com/photos/4021775/pexels-photo-4021775.jpeg?a
 # use UnoCSS 
 css: unocss
 ---
-# How I became a part time (unpaid) dermatologist
+# How to become something you're not - my dermatologist story
 ## Hasib Ahmed
 
 <!--
@@ -375,6 +375,7 @@ transition: slide-left
 <ul>
     <li>10% split of training data for a validation set - actual exam</li>
 </ul>
+<img class="h80" src="https://media1.giphy.com/media/gw3IWyGkC0rsazTi/giphy.gif?cid=ecf05e47l9xsma3uiakkostx7xppoyv3vnlkgjqaihd60m3q&rid=giphy.gif&ct=g"/>
 </div>
 
 <!--
@@ -446,6 +447,10 @@ Overall accuracy of 70.3% across 7 classification classes - Beating dermatologis
 85.35% accuracy for Melanoma classification - Beating dermatologists with over 10 years experience (1)
 </div>
 
+<div v-click>
+<img class="h75" src="https://media2.giphy.com/media/a0h7sAqON67nO/giphy.gif?cid=ecf05e47vxdsskgjp0zczw90f9l83qrvkaz5nd0iji9ois2i&rid=giphy.gif&ct=g"/>
+</div>
+
 <!--
 Even though overfitting has occured, 
 -->
@@ -457,25 +462,16 @@ transition: slide-left
 # Real Life Application
 
 <div v-click>
-```python
-def plot_confusion_matrix(...): ...
-```
-<img class="h90" src="img/confusion-matrix-labels.png"/>
+Convinced friends or family members to seek medical advice using an image taken of their skin and running it through the machine learning model
+</div>
+<div v-click>
+Ideal situation would be to improve the model & have it in an accessible mobile app so everyone can have this technology at their fingertips
+<img class="h75" src="https://media0.giphy.com/media/Vf9MzYq9rAPlHRKxcu/giphy.gif?cid=ecf05e47cqr6lvv0lzqrs7p1oxas17cmopqp5390ds9f3m7u&rid=giphy.gif&ct=g"/>
 </div>
 
 <!--
-a confusion matrix allows us to evaluate the quality of the machine learning models output
-the diagonal elements show us where the model has predicted correctly
-others are incorrect predictions
+1st point is how I was a part time dermatologist
 -->
-
----
-transition: slide-left
----
-
-# Questions?
-
-<img class="h90" src="img/confusion-matrix-labels.png"/>
 
 ---
 transition: slide-left
@@ -489,3 +485,10 @@ transition: slide-left
     <li>https://github.com/1solation/dermoscopic-skin-cancer-image-classifier-WTL</li>
 </ul>
 
+---
+transition: slide-left
+---
+
+# Questions?
+
+<img class="h100" src="https://media3.giphy.com/media/FcuiZUneg1YRAu1lH2/giphy.gif?cid=ecf05e47kl1x88qy6we5pylikk1shply8rem9i5hsz4ybkiq&rid=giphy.gif&ct=g"/>
