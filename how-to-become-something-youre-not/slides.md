@@ -89,8 +89,6 @@ The machine or algorithm can understand whatever we tell it to understand. We pi
 
 <div v-click>
 Common example is classifying cats and dogs
-</div>
-<div v-click>
 <img class="h-80 rounded shadow" src="img/cats-dogs.png"/>
 </div>
 
@@ -105,7 +103,7 @@ now we've gone over the core concepts
 transition: slide-left
 ---
 
-# How & why I become a part time Dermatologist
+# Why I become a part time Dermatologist
 
 <div v-click>
 A family member was  diagnosed with Alopecia Areata which is a disease that happens when the immune system attacks hair follicles and causes hair loss.
@@ -128,8 +126,8 @@ What serious skin conditions are out there?
 
 <!--
 & it got me thinking
-
-a type of skin cancer. It's often caused by too much sun exposure. Now I know what I need, it's time to find some data on it
+all of these look generally similar
+a type of skin cancer - low survival rate. It's often caused by too much UV exposure. 
 -->
 
 ---
@@ -224,6 +222,7 @@ Suspicions confirmed 🫡
 <!--
 if data wasn't enough, a graph on top always is
 we can see a massive imbalance, this can add to data biases and will skew our results. if ML model guesses brown 70% it'll probably be right for my dataset, but not general application
+melanocytic mevi is not dangerous but can turn cancerous
 We can fix this with data augmentation when we train the model
 -->
 
@@ -319,7 +318,7 @@ transition: slide-left
 
 <div v-click>
 <ul>
-    <li>Data Augmentation - Artificially expand the HAM10000 dataset in order to avoid the model overfitting.</li>
+    <li>Data Augmentation - Artificially expand the HAM10000 dataset in order to avoid the model overfitting</li>
 </ul>
 ```python
 datagen = ImageDataGenerator(
@@ -331,7 +330,7 @@ datagen = ImageDataGenerator(
         vertical_flip=False)  # flip images vertically randomly
 ```
 <br>
-This gave me over 100,000 images, rather than the 10,000 I started with
+This gave me a lot more images than the 10,000 I started with
 
 </div>
 
@@ -407,6 +406,7 @@ plt.show()
 <!--
 training uses the mock tests here & tests is the actual exam we're giving the model
 ideally, we'd love to see the two lines closer together
+epoch is how many times we train then do mock test
 -->
 
 ---
@@ -435,11 +435,11 @@ transition: slide-left
 # Results
 
 <div v-click>
-Training accuracy of 98.2% - Overfitting has occured
+Training accuracy of 98.2% - Overfitting has occurred because...
 </div>
 
 <div v-click>
-Overall accuracy of 70.3% across 7 classification classes - Beating dermatologists with 3-5 years of experience (1)
+Overall accuracy of 70.3% across 7 classification classes (types of skin lesion) - Beating dermatologists with 3-5 years of experience (1)
 </div>
 
 
@@ -480,7 +480,7 @@ transition: slide-left
 # Reference and Links
 
 <ul>
-    <li>(1) Morton, C.A and Mackie, R.M, 1998, Clinical accuracy of the cutaneous malignantmelanoma. The British journal of dermatology, 132(2), pp.283-287</li>
+    <li>(1) Morton, C.A and Mackie, R.M, 1998, Clinical accuracy of the cutaneous malignant melanoma. The British journal of dermatology, 132(2), pp.283-287</li>
     <li>https://github.com/1solation/ham10000_exploratory_data_analysis</li>
     <li>https://github.com/1solation/dermoscopic-skin-cancer-image-classifier-WTL</li>
 </ul>
