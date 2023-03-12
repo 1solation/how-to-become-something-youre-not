@@ -108,7 +108,7 @@ transition: slide-left
 # How & why I become a part time Dermatologist
 
 <div v-click>
-A family member was  diagnosed with Alopecia areata which is a disease that happens when the immune system attacks hair follicles and causes hair loss.
+A family member was  diagnosed with Alopecia Areata which is a disease that happens when the immune system attacks hair follicles and causes hair loss.
 </div>
 <br>
 <div v-click>
@@ -129,7 +129,7 @@ What serious skin conditions are out there?
 <!--
 & it got me thinking
 
-One of the most serious is something called Melanoma. Now I know what I need, it's time to find some data on it
+a type of skin cancer. It's often caused by too much sun exposure. Now I know what I need, it's time to find some data on it
 -->
 
 ---
@@ -158,7 +158,7 @@ transition: fade-out
 # Explore the dataset, with the power of code
 <div v-click>
 ```python
-// Categories of the diferent diseases
+# Categories of the diferent diseases
 lesion_type_dict = {
     'nv': 'Melanocytic nevi',
     'mel': 'Melanoma',
@@ -197,7 +197,7 @@ Something doesn't look right
 </div>
 
 <!--
-what make up of images do I have in my dataset
+what make up of images do I have in my dataset, to see if I have any biases
 Definitely showing more of one data point, or skin lesion
 -->
 
@@ -242,10 +242,13 @@ My requirements:
 </ul>
 </div>
 <div v-click>
+MobileNet Deep Neural Network
+</div>
+<div v-click>
 Pretrained refers to a machine learning model created by someone else and trained on a large dataset to solve a similar problem.
 </div>
 <div v-click>
-<img class="h65" src="https://media1.giphy.com/media/5wWf7HapUvpOumiXZRK/giphy.gif?cid=ecf05e478dmawwjncmkmcrsujq64nt99oj1m1qhjxzxun9ee&rid=giphy.gif&ct=g"/>
+<img class="h60" src="https://media1.giphy.com/media/5wWf7HapUvpOumiXZRK/giphy.gif?cid=ecf05e478dmawwjncmkmcrsujq64nt99oj1m1qhjxzxun9ee&rid=giphy.gif&ct=g"/>
 </div>
 
 <!--
@@ -260,6 +263,7 @@ transition: slide left
 ---
 
 # Time to train the model
+
 <div v-click>
 <img class="h100" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2VmYzM4NzI1YTRmYjM0YTliNjc0YmUyYTk3MmUwZDRmNThiZDAxYSZjdD1n/xmxGoENM1V81q/giphy.gif"/>
 </div>
@@ -273,6 +277,7 @@ transition: slide-left
 ---
 
 # Time to train the model
+
 <div v-click>
 <img class="h65" src="https://media0.giphy.com/media/zOvBKUUEERdNm/giphy.gif?cid=ecf05e47h2bvf22791h1pbfa9oaq8j378jg0z1lcg08tgx3o&rid=giphy.gif&ct=g"/>
 </div>
@@ -286,10 +291,201 @@ transition: slide-left
 ---
 
 # Steps to train
+
 <div v-click>
-<img class="h65" src="https://media0.giphy.com/media/zOvBKUUEERdNm/giphy.gif?cid=ecf05e47h2bvf22791h1pbfa9oaq8j378jg0z1lcg08tgx3o&rid=giphy.gif&ct=g"/>
+<ul>
+    <li>Read and pre-process the data</li>
+</ul>
+```python
+df = pd.read_csv(os.path.join(base_directory, 'HAM10000_metadata.csv'))
+# creation of new columns for readability later
+df['path'] = df['image_id'].map(img_path_dict.get)
+df['cell_type'] = df['dx'].map(lesion_types_dict.get)
+df['cell_type_idx'] = pd.Categorical(df['cell_type']).codes
+df['age'].fillna((df['age'].mean()), inplace=True) # because None values not supported.
+```
+
 </div>
 
 <!--
-But it was more like this
+Just like a chef prepares ingredients, I'll need to prepare my data
 -->
+
+---
+transition: slide-left
+---
+
+# Steps to train
+
+<div v-click>
+<ul>
+    <li>Data Augmentation - Artificially expand the HAM10000 dataset in order to avoid the model overfitting.</li>
+</ul>
+```python
+datagen = ImageDataGenerator(
+        rotation_range=20,  # rotate images between 0-180 degrees randomly
+        zoom_range = 0.1, # zoom image randomly
+        width_shift_range=0.1,  # shift images horizontally (the input is a fraction of total width) randomly
+        height_shift_range=0.1,  # shift images vertically (thei nput is a fraction of total height) randomly
+        horizontal_flip=True,  # flip images horizontally randomly
+        vertical_flip=False)  # flip images vertically randomly
+```
+<br>
+This gave me over 100,000 images, rather than the 10,000 I started with
+
+</div>
+
+<!--
+Data augment to enhance the data I had access to, since I couldn't go out and get more images myself
+-->
+
+---
+transition: slide-left
+---
+
+# Steps to train
+
+<div v-click>
+<ul>
+    <li>Resize the images to 224x224 as MobileNet cannot handle the original image dimesions (450x600)</li>
+</ul>
+```python
+df['image'] = df['path'].map(lambda x: np.asarray(Image.open(x).resize((224,224))))
+```
+<img class="h80" src="img/category_lesion_samples.png"/>
+
+</div>
+
+<!--
+Normalise data inputs to the model
+-->
+
+---
+transition: slide-left
+---
+
+# Test the model's accuracy
+
+<div v-click>
+<ul>
+    <li>80/20 split for training and testing data - mock test</li>
+</ul>
+</div>
+<div v-click>
+<ul>
+    <li>10% split of training data for a validation set - actual exam</li>
+</ul>
+</div>
+
+<!--
+test data is sort of like a mock test in school
+test against the test data & learn to improve
+validation data is more like the actual test, unseen data
+-->
+
+---
+transition: slide-left
+---
+
+# Test the model's accuracy
+
+<div v-click>
+```python
+# Plot the training and validation accuracy
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
+plt.title('Model accuracy')
+plt.ylabel('Accuracy')
+plt.xlabel('Epoch')
+plt.legend(['Train', 'Test'], loc='upper left')
+plt.show()
+```
+<img class="h70" src="img/derma-training-loss-graph.png"/>
+</div>
+
+<!--
+training uses the mock tests here & tests is the actual exam we're giving the model
+ideally, we'd love to see the two lines closer together
+-->
+
+---
+transition: slide-left
+---
+
+# Confusion Matrix
+
+<div v-click>
+```python
+def plot_confusion_matrix(...): ...
+```
+<img class="h90" src="img/confusion-matrix-labels.png"/>
+</div>
+
+<!--
+a confusion matrix allows us to evaluate the quality of the machine learning models output
+the diagonal elements show us where the model has predicted correctly
+others are incorrect predictions
+-->
+
+---
+transition: slide-left
+---
+
+# Results
+
+<div v-click>
+Training accuracy of 98.2% - Overfitting has occured
+</div>
+
+<div v-click>
+Overall accuracy of 70.3% across 7 classification classes - Beating dermatologists with 3-5 years of experience (1)
+</div>
+
+
+<div v-click>
+85.35% accuracy for Melanoma classification - Beating dermatologists with over 10 years experience (1)
+</div>
+
+<!--
+Even though overfitting has occured, 
+-->
+
+---
+transition: slide-left
+---
+
+# Real Life Application
+
+<div v-click>
+```python
+def plot_confusion_matrix(...): ...
+```
+<img class="h90" src="img/confusion-matrix-labels.png"/>
+</div>
+
+<!--
+a confusion matrix allows us to evaluate the quality of the machine learning models output
+the diagonal elements show us where the model has predicted correctly
+others are incorrect predictions
+-->
+
+---
+transition: slide-left
+---
+
+# Questions?
+
+<img class="h90" src="img/confusion-matrix-labels.png"/>
+
+---
+transition: slide-left
+---
+
+# Reference and Links
+
+<ul>
+    <li>(1) Morton, C.A and Mackie, R.M, 1998, Clinical accuracy of the cutaneous malignantmelanoma. The British journal of dermatology, 132(2), pp.283-287</li>
+    <li>https://github.com/1solation/ham10000_exploratory_data_analysis</li>
+    <li>https://github.com/1solation/dermoscopic-skin-cancer-image-classifier-WTL</li>
+</ul>
+
